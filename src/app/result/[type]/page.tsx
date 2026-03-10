@@ -48,6 +48,35 @@ const days = [
   { day: 7, label: "フィナーレ完走ダンス" },
 ];
 
+const bonuses = [
+  {
+    label: "ダイエット教科書",
+    desc: "なぜ痩せないのか、正しい知識をわかりやすく解説",
+    tag: "PDF",
+  },
+  {
+    label: "コンビニ食材リスト",
+    desc: "これだけ買えばOK。今日から使えるリスト",
+    tag: "PDF",
+  },
+  {
+    label: "炊飯器レシピ集",
+    desc: "準備5分、寝てる間にできる高タンパクレシピ",
+    tag: "レシピ",
+  },
+  {
+    label: "習慣チェックシート",
+    desc: "7日間を続けるための記録シート",
+    tag: "シート",
+  },
+  {
+    label: "無料オンライン個別相談",
+    desc: "7日完走者限定。あなた専用の次の一手を提案",
+    tag: "限定",
+    highlight: true,
+  },
+];
+
 interface Props {
   params: Promise<{ type: string }>;
 }
@@ -109,6 +138,61 @@ export default async function ResultPage({ params }: Props) {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* バリュースタック */}
+        <div className="bg-slate-800/60 border border-slate-700/50 rounded-2xl overflow-hidden">
+          <div className="px-5 py-4 border-b border-slate-700/50">
+            <p className="text-white font-black text-sm">
+              LINE登録で全部もらえます
+            </p>
+            <p className="text-slate-500 text-xs mt-0.5">登録無料・すべて無料特典</p>
+          </div>
+
+          {/* 7日間プログラム（メイン特典） */}
+          <div className={`px-5 py-4 border-b border-slate-700/30 bg-gradient-to-r ${accent.bg} bg-opacity-10`}>
+            <div className="flex items-start gap-3">
+              <svg viewBox="0 0 20 20" fill="currentColor" className={`w-5 h-5 ${accent.text} shrink-0 mt-0.5`}>
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-0.5">
+                  <p className="text-white font-black text-sm">あなた専用7日間ダンスプログラム</p>
+                  <span className={`text-xs px-1.5 py-0.5 rounded font-bold ${accent.badge}`}>メイン</span>
+                </div>
+                <p className="text-slate-400 text-xs">タイプ別に設計。毎朝1本届く</p>
+              </div>
+            </div>
+          </div>
+
+          {/* その他の特典 */}
+          {bonuses.map((b, i) => (
+            <div
+              key={i}
+              className={`px-5 py-4 flex items-start gap-3 ${
+                i < bonuses.length - 1 ? "border-b border-slate-700/30" : ""
+              } ${b.highlight ? "bg-orange-500/5" : ""}`}
+            >
+              <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-slate-500 shrink-0 mt-0.5">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+              </svg>
+              <div className="flex-1">
+                <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                  <p className={`font-bold text-sm ${b.highlight ? "text-orange-300" : "text-slate-200"}`}>
+                    {b.label}
+                  </p>
+                  <span className={`text-xs px-1.5 py-0.5 rounded font-bold ${
+                    b.highlight
+                      ? "bg-orange-500/20 text-orange-400"
+                      : "bg-slate-700 text-slate-400"
+                  }`}>
+                    {b.tag}
+                  </span>
+                </div>
+                <p className="text-slate-500 text-xs">{b.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* エルメ流入ボタン */}
