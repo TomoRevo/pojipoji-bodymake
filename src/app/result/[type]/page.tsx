@@ -13,10 +13,10 @@ const elmeUrls: Record<DiagnosisType, string> = {
 
 const typeAccent: Record<DiagnosisType, { bg: string; text: string; border: string; badge: string }> = {
   beginner: {
-    bg: "from-emerald-500 to-green-400",
-    text: "text-emerald-400",
-    border: "border-emerald-500/30",
-    badge: "bg-emerald-500/10 text-emerald-300",
+    bg: "from-violet-600 to-purple-500",
+    text: "text-violet-400",
+    border: "border-violet-500/30",
+    badge: "bg-violet-500/10 text-violet-300",
   },
   food: {
     bg: "from-orange-500 to-amber-400",
