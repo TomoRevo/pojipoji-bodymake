@@ -60,7 +60,7 @@ export default async function ResultPage({ params }: Props) {
   }
 
   const diagnosisType = type as DiagnosisType;
-  const { title, body } = typeMessages[diagnosisType];
+  const { title, hook, body, cta } = typeMessages[diagnosisType];
   const accent = typeAccent[diagnosisType];
   const elmeUrl = elmeUrls[diagnosisType];
 
@@ -71,37 +71,32 @@ export default async function ResultPage({ params }: Props) {
         {/* Header */}
         <div className="text-center">
           <p className="text-xs tracking-[0.25em] text-orange-400 uppercase font-semibold mb-1">
-            Stay Gold Gym
+            Stay Gold Gym — 診断結果
           </p>
-          <p className="text-slate-400 text-sm">診断結果が出ました</p>
         </div>
 
         {/* Result Card */}
-        <div className={`bg-gradient-to-br ${accent.bg} rounded-3xl p-7 text-white text-center shadow-xl`}>
-          <p className="text-sm font-medium opacity-80 mb-1">あなたは</p>
-          <h1 className="text-2xl font-black">「{title}」</h1>
+        <div className={`bg-gradient-to-br ${accent.bg} rounded-3xl px-7 py-8 text-white text-center shadow-xl`}>
+          <p className="text-sm font-medium opacity-75 mb-1">あなたは</p>
+          <h1 className="text-2xl font-black mb-4">「{title}」</h1>
+          <div className="bg-white/15 rounded-2xl px-4 py-3">
+            <p className="text-sm font-bold leading-relaxed">{hook}</p>
+          </div>
         </div>
 
-        {/* Message */}
-        <div className={`bg-slate-800/60 border ${accent.border} rounded-2xl p-6 flex flex-col gap-3 backdrop-blur-sm`}>
+        {/* Body messages */}
+        <div className={`bg-slate-800/60 border ${accent.border} rounded-2xl p-6 flex flex-col gap-4`}>
           {body.map((line, i) => (
-            <p key={i} className="text-slate-300 leading-relaxed text-sm">
-              {line}
-            </p>
+            <div key={i} className="flex gap-3">
+              <span className={`text-xs font-black mt-1 shrink-0 ${accent.text}`}>▶</span>
+              <p className="text-slate-200 leading-relaxed text-sm">{line}</p>
+            </div>
           ))}
-          <div className="mt-2 pt-4 border-t border-slate-700">
-            <p className={`text-sm font-bold ${accent.text}`}>
-              LINEで7日間プログラムを受け取ろう
-            </p>
-            <p className="text-slate-500 text-xs mt-1">
-              登録後すぐにあなた専用の内容が届きます
-            </p>
-          </div>
         </div>
 
         {/* 7日間プログラム内容 */}
         <div className="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-5">
-          <p className={`font-black text-sm mb-4 ${accent.text} tracking-wide uppercase`}>
+          <p className={`font-black text-xs mb-4 ${accent.text} tracking-widest uppercase`}>
             7日間チャレンジの内容
           </p>
           <div className="flex flex-col gap-2">
@@ -117,16 +112,18 @@ export default async function ResultPage({ params }: Props) {
         </div>
 
         {/* エルメ流入ボタン */}
-        <a
-          href={elmeUrl}
-          className={`block w-full text-center bg-gradient-to-r ${accent.bg} text-white font-black text-base px-6 py-5 rounded-2xl shadow-lg active:scale-95 transition-all`}
-        >
-          LINEで7日間プログラムを受け取る
-        </a>
+        <div className="flex flex-col gap-2">
+          <a
+            href={elmeUrl}
+            className={`block w-full text-center bg-gradient-to-r ${accent.bg} text-white font-black text-base px-6 py-5 rounded-2xl shadow-lg active:scale-95 transition-all`}
+          >
+            {cta} →
+          </a>
+          <p className="text-center text-slate-600 text-xs">
+            LINEで受け取る · 登録無料 · いつでも退会OK
+          </p>
+        </div>
 
-        <p className="text-center text-slate-600 text-xs">
-          登録無料 · いつでも退会OK
-        </p>
       </div>
     </main>
   );
