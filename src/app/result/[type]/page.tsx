@@ -150,7 +150,7 @@ export default async function ResultPage({ params }: Props) {
           </div>
 
           {/* 7日間プログラム（メイン特典） */}
-          <div className={`px-5 py-4 border-b border-slate-700/30 bg-gradient-to-r ${accent.bg} bg-opacity-10`}>
+          <div className="px-5 py-4 border-b border-slate-700/30 bg-slate-700/40">
             <div className="flex items-start gap-3">
               <svg viewBox="0 0 20 20" fill="currentColor" className={`w-5 h-5 ${accent.text} shrink-0 mt-0.5`}>
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -158,9 +158,9 @@ export default async function ResultPage({ params }: Props) {
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-0.5">
                   <p className="text-white font-black text-sm">あなた専用7日間ダンスプログラム</p>
-                  <span className={`text-xs px-1.5 py-0.5 rounded font-bold ${accent.badge}`}>メイン</span>
+                  <span className="text-xs px-1.5 py-0.5 rounded font-bold bg-orange-500 text-white">メイン</span>
                 </div>
-                <p className="text-slate-400 text-xs">タイプ別に設計。毎朝1本届く</p>
+                <p className="text-slate-300 text-xs">タイプ別に設計。毎朝1本届く</p>
               </div>
             </div>
           </div>
@@ -171,25 +171,25 @@ export default async function ResultPage({ params }: Props) {
               key={i}
               className={`px-5 py-4 flex items-start gap-3 ${
                 i < bonuses.length - 1 ? "border-b border-slate-700/30" : ""
-              } ${b.highlight ? "bg-orange-500/5" : ""}`}
+              }`}
             >
-              <svg viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-slate-500 shrink-0 mt-0.5">
+              <svg viewBox="0 0 20 20" fill="currentColor" className={`w-5 h-5 ${accent.text} shrink-0 mt-0.5`}>
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-                  <p className={`font-bold text-sm ${b.highlight ? "text-orange-300" : "text-slate-200"}`}>
+                  <p className={`font-bold text-sm ${b.highlight ? "text-orange-300" : "text-white"}`}>
                     {b.label}
                   </p>
                   <span className={`text-xs px-1.5 py-0.5 rounded font-bold ${
                     b.highlight
-                      ? "bg-orange-500/20 text-orange-400"
-                      : "bg-slate-700 text-slate-400"
+                      ? "bg-orange-500 text-white"
+                      : "bg-slate-600 text-slate-200"
                   }`}>
                     {b.tag}
                   </span>
                 </div>
-                <p className="text-slate-500 text-xs">{b.desc}</p>
+                <p className="text-slate-300 text-xs">{b.desc}</p>
               </div>
             </div>
           ))}
