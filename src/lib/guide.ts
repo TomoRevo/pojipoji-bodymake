@@ -16,8 +16,8 @@ export interface GuideContent {
 }
 
 export const guideContent: Record<DiagnosisType, GuideContent> = {
-  beginner: {
-    type: "beginner",
+  first_step: {
+    type: "first_step",
     headline: "まず「続けること」だけ考えよう",
     intro:
       "運動習慣ゼロでも大丈夫。このプログラムは「1日3分・何があっても続けられる」ことだけを目標にしています。完璧にやる必要はありません。",
@@ -85,11 +85,11 @@ export const guideContent: Record<DiagnosisType, GuideContent> = {
     ],
   },
 
-  food: {
-    type: "food",
+  food_reset: {
+    type: "food_reset",
     headline: "食事を「制限」しなくていい。「選び方」を変えるだけ",
     intro:
-      "食事改善タイプのあなたは、食べ方を少し変えるだけで体重が動き始めます。我慢や制限は必要ありません。「何を選ぶか」を変えるだけでOKです。",
+      "食事リセットタイプのあなたは、食べ方を少し変えるだけで体重が動き始めます。我慢や制限は必要ありません。「何を選ぶか」を変えるだけでOKです。",
     days: [
       {
         day: 1,
@@ -156,8 +156,8 @@ export const guideContent: Record<DiagnosisType, GuideContent> = {
     ],
   },
 
-  busy: {
-    type: "busy",
+  time_hack: {
+    type: "time_hack",
     headline: "スキマ時間3分でOK。時間がないからこそ「効率」を上げる",
     intro:
       "忙しいあなたに必要なのは「長時間の運動」ではなく「短時間で確実に体を動かす仕組み」です。通勤中・休憩中・寝る前。どこでもできる方法だけを集めました。",
@@ -226,8 +226,8 @@ export const guideContent: Record<DiagnosisType, GuideContent> = {
     ],
   },
 
-  serious: {
-    type: "serious",
+  switch_on: {
+    type: "switch_on",
     headline: "方向性を整えれば、あとは続けるだけ",
     intro:
       "やる気はある。でも結果が出ない。それは「何をどれだけやればいいか」が明確でないからです。このプログラムで正しい方向性を整えましょう。",

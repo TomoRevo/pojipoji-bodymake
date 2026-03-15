@@ -1,36 +1,32 @@
-import { typeMessages, typeLabels, DiagnosisType } from "@/lib/diagnosis";
+import { typeMessages, DiagnosisType } from "@/lib/diagnosis";
 import { notFound } from "next/navigation";
 
-const validTypes: DiagnosisType[] = ["beginner", "food", "busy", "serious"];
+const validTypes: DiagnosisType[] = ["first_step", "food_reset", "time_hack", "switch_on"];
 
-// ▼ ここにエルメの流入URLを入れてください
-const elmeUrls: Record<DiagnosisType, string> = {
-  beginner: "https://line.me/R/ti/p/xxxx", // 超初心者タイプ用
-  food:     "https://line.me/R/ti/p/xxxx", // 食事改善タイプ用
-  busy:     "https://line.me/R/ti/p/xxxx", // 忙しいタイプ用
-  serious:  "https://line.me/R/ti/p/xxxx", // 本気タイプ用
-};
+// ▼ エルメの流入URL（診断ツール用・共通1つ）
+// エルメ側で「あなたのタイプを教えてください」と聞いてタグ分岐する
+const ELME_URL = "https://line.me/R/ti/p/xxxx"; // ← ここにエルメの流入URLを設定
 
 const typeAccent: Record<DiagnosisType, { bg: string; text: string; border: string; badge: string }> = {
-  beginner: {
+  first_step: {
     bg: "from-violet-600 to-purple-500",
     text: "text-violet-400",
     border: "border-violet-500/30",
     badge: "bg-violet-500/10 text-violet-300",
   },
-  food: {
+  food_reset: {
     bg: "from-orange-500 to-amber-400",
     text: "text-orange-400",
     border: "border-orange-500/30",
     badge: "bg-orange-500/10 text-orange-300",
   },
-  busy: {
+  time_hack: {
     bg: "from-blue-500 to-cyan-400",
     text: "text-blue-400",
     border: "border-blue-500/30",
     badge: "bg-blue-500/10 text-blue-300",
   },
-  serious: {
+  switch_on: {
     bg: "from-rose-500 to-pink-400",
     text: "text-rose-400",
     border: "border-rose-500/30",
@@ -38,42 +34,22 @@ const typeAccent: Record<DiagnosisType, { bg: string; text: string; border: stri
   },
 };
 
-const days = [
-  { day: 1, label: "朝3分で代謝UP ダンス" },
-  { day: 2, label: "食後にやると痩せるダンス" },
-  { day: 3, label: "腹筋ゼロで腹凹ダンス" },
-  { day: 4, label: "60分歩くより脂肪燃焼ダンス" },
-  { day: 5, label: "上半身シェイプダンス" },
-  { day: 6, label: "全身脂肪燃焼ダンス" },
-  { day: 7, label: "フィナーレ完走ダンス" },
-];
-
 const bonuses = [
   {
-    label: "ダイエット教科書",
-    desc: "なぜ痩せないのか、正しい知識をわかりやすく解説",
+    label: "あなた専用ダイエットタイプ別ガイド",
+    desc: "タイプに合った戦略・今日からできるアクション・3ヶ月後のイメージ",
     tag: "PDF",
-  },
-  {
-    label: "コンビニ食材リスト",
-    desc: "これだけ買えばOK。今日から使えるリスト",
-    tag: "PDF",
-  },
-  {
-    label: "炊飯器レシピ集",
-    desc: "準備5分、寝てる間にできる高タンパクレシピ",
-    tag: "レシピ",
-  },
-  {
-    label: "習慣チェックシート",
-    desc: "7日間を続けるための記録シート",
-    tag: "シート",
-  },
-  {
-    label: "無料オンライン個別相談",
-    desc: "7日完走者限定。あなた専用の次の一手を提案",
-    tag: "限定",
     highlight: true,
+  },
+  {
+    label: "コンビニおすすめ食材ガイド",
+    desc: "コンビニで買えるダイエット食材をまとめたリスト",
+    tag: "PDF",
+  },
+  {
+    label: "もう体型に困らないダイエットの教科書",
+    desc: "正しい知識をわかりやすく解説。これだけで食事の考え方が変わる",
+    tag: "PDF",
   },
 ];
 
@@ -91,7 +67,7 @@ export default async function ResultPage({ params }: Props) {
   const diagnosisType = type as DiagnosisType;
   const { title, hook, body, cta } = typeMessages[diagnosisType];
   const accent = typeAccent[diagnosisType];
-  const elmeUrl = elmeUrls[diagnosisType];
+  const elmeUrl = ELME_URL;
 
   return (
     <main className="min-h-screen bg-slate-900 text-white px-4 py-10">
@@ -123,49 +99,15 @@ export default async function ResultPage({ params }: Props) {
           ))}
         </div>
 
-        {/* 7日間プログラム内容 */}
-        <div className="bg-slate-800/60 border border-slate-700/50 rounded-2xl p-5">
-          <p className={`font-black text-xs mb-4 ${accent.text} tracking-widest uppercase`}>
-            7日間チャレンジの内容
-          </p>
-          <div className="flex flex-col gap-2">
-            {days.map((d) => (
-              <div key={d.day} className="flex items-center gap-3">
-                <span className={`text-xs font-black px-2 py-0.5 rounded-md ${accent.badge} shrink-0`}>
-                  DAY{d.day}
-                </span>
-                <span className="text-slate-300 text-sm">{d.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* バリュースタック */}
+        {/* 特典一覧 */}
         <div className="bg-slate-800/60 border border-slate-700/50 rounded-2xl overflow-hidden">
           <div className="px-5 py-4 border-b border-slate-700/50">
             <p className="text-white font-black text-sm">
-              LINE登録で全部もらえます
+              LINEで受け取れる無料特典
             </p>
-            <p className="text-slate-500 text-xs mt-0.5">登録無料・すべて無料特典</p>
+            <p className="text-slate-500 text-xs mt-0.5">登録無料・すべて無料・いつでも退会OK</p>
           </div>
 
-          {/* 7日間プログラム（メイン特典） */}
-          <div className="px-5 py-4 border-b border-slate-700/30 bg-slate-700/40">
-            <div className="flex items-start gap-3">
-              <svg viewBox="0 0 20 20" fill="currentColor" className={`w-5 h-5 ${accent.text} shrink-0 mt-0.5`}>
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-0.5">
-                  <p className="text-white font-black text-sm">あなた専用7日間ダンスプログラム</p>
-                  <span className="text-xs px-1.5 py-0.5 rounded font-bold bg-orange-500 text-white">メイン</span>
-                </div>
-                <p className="text-slate-300 text-xs">タイプ別に設計。毎朝1本届く</p>
-              </div>
-            </div>
-          </div>
-
-          {/* その他の特典 */}
           {bonuses.map((b, i) => (
             <div
               key={i}

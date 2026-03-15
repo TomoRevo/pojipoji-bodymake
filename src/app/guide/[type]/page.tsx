@@ -2,34 +2,34 @@ import { notFound } from "next/navigation";
 import { DiagnosisType, typeLabels } from "@/lib/diagnosis";
 import { guideContent } from "@/lib/guide";
 
-const validTypes: DiagnosisType[] = ["beginner", "food", "busy", "serious"];
+const validTypes: DiagnosisType[] = ["first_step", "food_reset", "time_hack", "switch_on"];
 
 const typeEmoji: Record<DiagnosisType, string> = {
-  beginner: "🌱",
-  food: "🥗",
-  busy: "⚡",
-  serious: "🔥",
+  first_step: "🌱",
+  food_reset: "🥗",
+  time_hack: "⚡",
+  switch_on: "🔥",
 };
 
 const typeGradient: Record<DiagnosisType, string> = {
-  beginner: "from-emerald-500 to-green-400",
-  food: "from-orange-500 to-amber-400",
-  busy: "from-blue-500 to-cyan-400",
-  serious: "from-pink-600 to-rose-500",
+  first_step: "from-emerald-500 to-green-400",
+  food_reset: "from-orange-500 to-amber-400",
+  time_hack: "from-blue-500 to-cyan-400",
+  switch_on: "from-pink-600 to-rose-500",
 };
 
 const typeAccent: Record<DiagnosisType, string> = {
-  beginner: "text-emerald-600",
-  food: "text-orange-500",
-  busy: "text-blue-500",
-  serious: "text-pink-600",
+  first_step: "text-emerald-600",
+  food_reset: "text-orange-500",
+  time_hack: "text-blue-500",
+  switch_on: "text-pink-600",
 };
 
 const typeBorder: Record<DiagnosisType, string> = {
-  beginner: "border-emerald-200 bg-emerald-50",
-  food: "border-orange-200 bg-orange-50",
-  busy: "border-blue-200 bg-blue-50",
-  serious: "border-pink-200 bg-pink-50",
+  first_step: "border-emerald-200 bg-emerald-50",
+  food_reset: "border-orange-200 bg-orange-50",
+  time_hack: "border-blue-200 bg-blue-50",
+  switch_on: "border-pink-200 bg-pink-50",
 };
 
 interface Props {
@@ -142,7 +142,7 @@ export default async function GuidePage({ params }: Props) {
             7日間やり切ったら
           </p>
           <p className="text-xs text-gray-500 mb-5 leading-relaxed">
-            無料のオンライン個別相談で
+            無料の体験セッションで
             あなたに合う「次のステップ」を一緒に考えます。
             売り込みは一切しません。
           </p>
@@ -150,7 +150,7 @@ export default async function GuidePage({ params }: Props) {
             href="https://line.me/R/ti/p/@your-line-id"
             className={`inline-block text-white font-bold text-sm px-7 py-3.5 rounded-full bg-gradient-to-r ${gradient} shadow active:scale-95 transition-all`}
           >
-            LINEで相談を申し込む
+            LINEで体験を申し込む
           </a>
           <p className="text-xs text-gray-400 mt-3">無料・売り込みなし</p>
         </div>

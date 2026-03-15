@@ -30,7 +30,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build
+        run: npx next build --webpack
         env:
           NEXT_PUBLIC_LINE_ADD_URL: ${{ secrets.NEXT_PUBLIC_LINE_ADD_URL }}
           NEXT_PUBLIC_LIFF_ID: ${{ secrets.NEXT_PUBLIC_LIFF_ID }}
