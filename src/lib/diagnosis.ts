@@ -59,6 +59,13 @@ export const questions: Question[] = [
   },
 ];
 
+export const validTypes: DiagnosisType[] = [
+  "first_step",
+  "food_reset",
+  "time_hack",
+  "switch_on",
+];
+
 export function calcType(answers: ("A" | "B" | "C" | "D")[]): DiagnosisType {
   const count = { A: 0, B: 0, C: 0, D: 0 };
   answers.forEach((a) => count[a]++);

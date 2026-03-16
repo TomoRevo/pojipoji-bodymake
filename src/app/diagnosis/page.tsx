@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { questions, calcType } from "@/lib/diagnosis";
 import DiagnosisCard from "@/components/DiagnosisCard";
+import HamburgerMenu from "@/components/HamburgerMenu";
 
 const analyzingSteps = [
   "回答データを収集中...",
@@ -151,16 +152,6 @@ function AnalyzingScreen() {
         </div>
       </div>
 
-      <style>{`
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-        @keyframes fadeSlide {
-          from { opacity: 0; transform: translateY(6px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
     </div>
   );
 }
@@ -199,6 +190,7 @@ export default function DiagnosisPage() {
 
   return (
     <main className="min-h-screen bg-slate-900 px-5 py-10 relative overflow-hidden">
+      <HamburgerMenu />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-80 h-80 bg-orange-500 rounded-full blur-[130px] opacity-8 pointer-events-none" />
 
       <div className="relative z-10 max-w-md mx-auto">

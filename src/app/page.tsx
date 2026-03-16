@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DancerSVG from "@/components/DancerSVG";
+import HamburgerMenu from "@/components/HamburgerMenu";
 
 const LINE_ADD_URL = process.env.NEXT_PUBLIC_LINE_ADD_URL ?? "#";
 
@@ -52,6 +53,7 @@ const points = [
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-slate-900 text-white">
+      <HamburgerMenu />
 
       {/* Hero */}
       <section className="relative overflow-hidden px-5 pt-16 pb-0 min-h-[90vh] flex flex-col">
@@ -191,6 +193,38 @@ export default function HomePage() {
                 Instagram最高20万再生。
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 特典コンテンツ */}
+      <section className="px-5 py-14">
+        <div className="max-w-md mx-auto">
+          <p className="text-xs tracking-[0.25em] text-orange-400 uppercase font-semibold mb-2">Free Contents</p>
+          <h2 className="text-2xl font-black text-white mb-7">
+            無料で読めるコンテンツ
+          </h2>
+          <div className="flex flex-col gap-3">
+            <Link
+              href="/diagnosis"
+              className="flex items-center gap-4 bg-slate-800/60 border border-slate-700/50 rounded-2xl p-5 backdrop-blur-sm hover:border-orange-500/30 transition-colors"
+            >
+              <span className="text-2xl shrink-0">🔍</span>
+              <div>
+                <p className="font-bold text-white text-sm">ダイエットタイプ診断</p>
+                <p className="text-slate-400 text-xs mt-1">30秒であなたに合うやり方がわかる</p>
+              </div>
+            </Link>
+            <Link
+              href="/textbook"
+              className="flex items-center gap-4 bg-slate-800/60 border border-slate-700/50 rounded-2xl p-5 backdrop-blur-sm hover:border-orange-500/30 transition-colors"
+            >
+              <span className="text-2xl shrink-0">📖</span>
+              <div>
+                <p className="font-bold text-white text-sm">ダイエットの教科書</p>
+                <p className="text-slate-400 text-xs mt-1">食事・運動・習慣・メンタルの基礎知識</p>
+              </div>
+            </Link>
           </div>
         </div>
       </section>

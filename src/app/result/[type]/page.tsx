@@ -1,11 +1,9 @@
-import { typeMessages, DiagnosisType } from "@/lib/diagnosis";
+import { typeMessages, DiagnosisType, validTypes, typeLabels } from "@/lib/diagnosis";
 import { notFound } from "next/navigation";
+import HamburgerMenu from "@/components/HamburgerMenu";
+import type { Metadata } from "next";
 
-const validTypes: DiagnosisType[] = ["first_step", "food_reset", "time_hack", "switch_on"];
-
-// ▼ エルメの流入URL（診断ツール用・共通1つ）
-// エルメ側で「あなたのタイプを教えてください」と聞いてタグ分岐する
-const ELME_URL = "https://line.me/R/ti/p/xxxx"; // ← ここにエルメの流入URLを設定
+const ELME_URL = process.env.NEXT_PUBLIC_LINE_ADD_URL || "#";
 
 const typeAccent: Record<DiagnosisType, { bg: string; text: string; border: string; badge: string }> = {
   first_step: {
@@ -57,6 +55,18 @@ interface Props {
   params: Promise<{ type: string }>;
 }
 
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { type } = await params;
+  if (!validTypes.includes(type as DiagnosisType)) {
+    return { title: "ページが見つかりません" };
+  }
+  const label = typeLabels[type as DiagnosisType];
+  return {
+    title: `あなたは「${label}」｜STAY GOLD GYM 診断結果`,
+    description: `あなたのダイエットタイプは「${label}」。タイプに合った戦略で、無理なく体を変えていきましょう。`,
+  };
+}
+
 export default async function ResultPage({ params }: Props) {
   const { type } = await params;
 
@@ -71,6 +81,7 @@ export default async function ResultPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-slate-900 text-white px-4 py-10">
+      <HamburgerMenu />
       <div className="max-w-md mx-auto flex flex-col gap-5">
 
         {/* Header */}
@@ -141,6 +152,8 @@ export default async function ResultPage({ params }: Props) {
         <div className="flex flex-col gap-2">
           <a
             href={elmeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className={`block w-full text-center bg-gradient-to-r ${accent.bg} text-white font-black text-base px-6 py-5 rounded-2xl shadow-lg active:scale-95 transition-all`}
           >
             {cta} →
