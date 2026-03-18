@@ -100,9 +100,9 @@ export default async function ResultPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Body messages — 最初の1つだけ見せる */}
+        {/* Body messages — 3つ目まで見せる */}
         <div className={`bg-slate-800/60 border ${accent.border} rounded-2xl p-6 flex flex-col gap-4`}>
-          {body.slice(0, 1).map((line, i) => (
+          {body.slice(0, 3).map((line, i) => (
             <div key={i} className="flex gap-3">
               <span className={`text-xs font-black mt-1 shrink-0 ${accent.text}`}>▶</span>
               <p className="text-slate-200 leading-relaxed text-sm">{line}</p>
@@ -110,11 +110,11 @@ export default async function ResultPage({ params }: Props) {
           ))}
         </div>
 
-        {/* ぼかしエリア：残りのbody + 特典 */}
+        {/* ぼかしエリア：最後のbody + 特典 */}
         <div className="relative">
           <div className="blur-[6px] select-none pointer-events-none" aria-hidden="true">
             <div className={`bg-slate-800/60 border ${accent.border} rounded-2xl p-6 flex flex-col gap-4`}>
-              {body.slice(1).map((line, i) => (
+              {body.slice(3).map((line, i) => (
                 <div key={i} className="flex gap-3">
                   <span className={`text-xs font-black mt-1 shrink-0 ${accent.text}`}>▶</span>
                   <p className="text-slate-200 leading-relaxed text-sm">{line}</p>
@@ -139,10 +139,13 @@ export default async function ResultPage({ params }: Props) {
           </div>
 
           {/* グラデーションオーバーレイ */}
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/0 via-slate-900/70 to-slate-900 flex items-end justify-center pb-4">
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/0 via-slate-900/80 to-slate-900 flex items-end justify-center pb-4">
             <div className="text-center px-4">
-              <p className="text-slate-300 text-sm font-bold mb-4">
-                続きはLINEで無料で受け取れます
+              <p className="text-slate-300 text-sm font-bold mb-1">
+                あなた専用のアドバイスと無料特典は
+              </p>
+              <p className="text-white text-base font-black">
+                LINEで受け取れます
               </p>
             </div>
           </div>
