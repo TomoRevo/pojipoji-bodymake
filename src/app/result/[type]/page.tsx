@@ -127,7 +127,7 @@ export default async function ResultPage({ params }: Props) {
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/0 via-slate-900/80 to-slate-900 flex items-end justify-center pb-4">
             <div className="text-center px-4">
               <p className="text-slate-300 text-sm font-bold">
-                あなた専用のアドバイスの続きはLINEで
+                あなた専用のアドバイスと特典をLINEでお届けします
               </p>
             </div>
           </div>
