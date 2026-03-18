@@ -100,9 +100,9 @@ export default async function ResultPage({ params }: Props) {
           </div>
         </div>
 
-        {/* Body messages */}
+        {/* Body messages — 最初の1つだけ見せる */}
         <div className={`bg-slate-800/60 border ${accent.border} rounded-2xl p-6 flex flex-col gap-4`}>
-          {body.map((line, i) => (
+          {body.slice(0, 1).map((line, i) => (
             <div key={i} className="flex gap-3">
               <span className={`text-xs font-black mt-1 shrink-0 ${accent.text}`}>▶</span>
               <p className="text-slate-200 leading-relaxed text-sm">{line}</p>
@@ -110,42 +110,42 @@ export default async function ResultPage({ params }: Props) {
           ))}
         </div>
 
-        {/* 特典一覧 */}
-        <div className="bg-slate-800/60 border border-slate-700/50 rounded-2xl overflow-hidden">
-          <div className="px-5 py-4 border-b border-slate-700/50">
-            <p className="text-white font-black text-sm">
-              LINEで受け取れる無料特典
-            </p>
-            <p className="text-slate-500 text-xs mt-0.5">登録無料・すべて無料・いつでも退会OK</p>
+        {/* ぼかしエリア：残りのbody + 特典 */}
+        <div className="relative">
+          <div className="blur-[6px] select-none pointer-events-none" aria-hidden="true">
+            <div className={`bg-slate-800/60 border ${accent.border} rounded-2xl p-6 flex flex-col gap-4`}>
+              {body.slice(1).map((line, i) => (
+                <div key={i} className="flex gap-3">
+                  <span className={`text-xs font-black mt-1 shrink-0 ${accent.text}`}>▶</span>
+                  <p className="text-slate-200 leading-relaxed text-sm">{line}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-5 bg-slate-800/60 border border-slate-700/50 rounded-2xl overflow-hidden">
+              <div className="px-5 py-4 border-b border-slate-700/50">
+                <p className="text-white font-black text-sm">LINEで受け取れる無料特典</p>
+              </div>
+              {bonuses.map((b, i) => (
+                <div key={i} className="px-5 py-4 flex items-start gap-3 border-b border-slate-700/30">
+                  <div className="w-5 h-5 bg-slate-600 rounded-full shrink-0" />
+                  <div>
+                    <p className="font-bold text-sm text-white">{b.label}</p>
+                    <p className="text-slate-400 text-xs">{b.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
-          {bonuses.map((b, i) => (
-            <div
-              key={i}
-              className={`px-5 py-4 flex items-start gap-3 ${
-                i < bonuses.length - 1 ? "border-b border-slate-700/30" : ""
-              }`}
-            >
-              <svg viewBox="0 0 20 20" fill="currentColor" className={`w-5 h-5 ${accent.text} shrink-0 mt-0.5`}>
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-              </svg>
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-0.5 flex-wrap">
-                  <p className={`font-bold text-sm ${b.highlight ? "text-orange-300" : "text-white"}`}>
-                    {b.label}
-                  </p>
-                  <span className={`text-xs px-1.5 py-0.5 rounded font-bold ${
-                    b.highlight
-                      ? "bg-orange-500 text-white"
-                      : "bg-slate-600 text-slate-200"
-                  }`}>
-                    {b.tag}
-                  </span>
-                </div>
-                <p className="text-slate-300 text-xs">{b.desc}</p>
-              </div>
+          {/* グラデーションオーバーレイ */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/0 via-slate-900/70 to-slate-900 flex items-end justify-center pb-4">
+            <div className="text-center px-4">
+              <p className="text-slate-300 text-sm font-bold mb-4">
+                続きはLINEで無料で受け取れます
+              </p>
             </div>
-          ))}
+          </div>
         </div>
 
         {/* エルメ流入ボタン */}
