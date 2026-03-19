@@ -53,7 +53,6 @@ const typeEmoji: Record<DiagnosisType, string> = {
   gaman: "🍽️", info: "📱", perfect: "💎", busy: "⏰", rebound: "🔄",
 };
 
-/* 特典（教科書はLINE登録後限定なのでここには含めない） */
 const bonuses = [
   {
     label: "あなた専用タイプ別ガイド",
@@ -64,6 +63,11 @@ const bonuses = [
   {
     label: "コンビニ食材おすすめリスト",
     desc: "今日の帰りから使える。選ぶだけでOKの食材ガイド",
+    tag: "全員共通",
+  },
+  {
+    label: "ダイエットの教科書",
+    desc: "知ってるだけで食事の考え方が変わる。コツをギュッとまとめました",
     tag: "全員共通",
   },
 ];
