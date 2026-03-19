@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { DiagnosisType } from "@/lib/diagnosis";
+/* 旧4タイプ用 */
+type DiagnosisType = "first_step" | "food_reset" | "time_hack" | "switch_on";
 import { guideData } from "@/lib/guide";
 import HamburgerMenu from "@/components/HamburgerMenu";
 import {

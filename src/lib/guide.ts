@@ -1,4 +1,5 @@
-import { DiagnosisType } from "./diagnosis";
+/* 旧4タイプ用ガイドデータ。新5タイプ移行後に更新予定 */
+type LegacyType = "first_step" | "food_reset" | "time_hack" | "switch_on";
 
 export interface GuideAction {
   title: string;
@@ -13,7 +14,7 @@ export interface GuideKey {
 }
 
 export interface GuideData {
-  type: DiagnosisType;
+  type: LegacyType;
   typeName: string;
   subCopy: string;
   themeColor: {
@@ -42,7 +43,7 @@ export interface GuideData {
   ctaClosing: string;
 }
 
-export const guideData: Record<DiagnosisType, GuideData> = {
+export const guideData: Record<LegacyType, GuideData> = {
   first_step: {
     type: "first_step",
     typeName: "はじめの一歩タイプ",
