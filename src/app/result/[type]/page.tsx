@@ -1,6 +1,5 @@
 import { typeMessages, DiagnosisType, validTypes, typeLabels } from "@/lib/diagnosis";
 import { notFound } from "next/navigation";
-import HamburgerMenu from "@/components/HamburgerMenu";
 import type { Metadata } from "next";
 
 const ELME_URL = process.env.NEXT_PUBLIC_LINE_ADD_URL || "#";
@@ -96,7 +95,6 @@ export default async function ResultPage({ params }: Props) {
 
   return (
     <main className="min-h-screen bg-white px-4 py-8">
-      <HamburgerMenu />
       <div className="max-w-md mx-auto flex flex-col gap-5">
 
         <p className="text-center text-[11px] tracking-[0.15em] text-gray-400">あなたの診断結果</p>

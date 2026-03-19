@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { checkGroups, calcType } from "@/lib/diagnosis";
-import HamburgerMenu from "@/components/HamburgerMenu";
-
 const MIN_CHECKS = 5;
 
 /* ── 分析中画面 ── */
@@ -86,7 +84,6 @@ export default function DiagnosisPage() {
 
   return (
     <main className="min-h-screen bg-white px-4 py-8">
-      <HamburgerMenu />
       <div className="max-w-md mx-auto flex flex-col gap-6">
 
         {/* Header */}
