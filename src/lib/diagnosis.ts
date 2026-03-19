@@ -69,61 +69,61 @@ const allItems: CheckItem[] = [
   { id: "rebound_6", text: "「今度こそ」が何度目かわからない", type: "rebound" },
 ];
 
-/** テーマ別にシャッフルして表示（タイプを直接見せない） */
+/** テーマ別にグループ化（複数タイプを混ぜてバレにくくする） */
 export const checkGroups: CheckGroup[] = [
   {
-    title: "食事について",
+    title: "ふだんの食事のこと",
     items: [
-      allItems[0],  // gaman_1
-      allItems[3],  // gaman_4
-      allItems[4],  // gaman_5
-      allItems[8],  // info_3
-      allItems[1],  // gaman_2
-      allItems[2],  // gaman_3
+      allItems[0],  // gaman_1: 食事制限をしたことがある
+      allItems[4],  // gaman_5: カロリーを気にして食事を選ぶ
+      allItems[1],  // gaman_2: 食べちゃダメと思うほど食べたくなる
+      allItems[8],  // info_3: 「これがいい」と聞くと試したくなる
+      allItems[3],  // gaman_4: 夜に食べすぎて後悔
+      allItems[2],  // gaman_3: 甘いものを我慢するのがつらい
     ],
   },
   {
-    title: "気持ち・性格について",
+    title: "自分の性格やクセ",
     items: [
-      allItems[12], // perfect_1
-      allItems[13], // perfect_2
-      allItems[16], // perfect_5
-      allItems[15], // perfect_4
-      allItems[14], // perfect_3
-      allItems[17], // perfect_6
+      allItems[12], // perfect_1: やるからにはちゃんとやりたい
+      allItems[16], // perfect_5: 0か100かで考えがち
+      allItems[27], // rebound_4: 意志が弱いと自分を責めた
+      allItems[13], // perfect_2: 1日サボるともうダメだ
+      allItems[15], // perfect_4: 他人の成果と比べて落ち込む
+      allItems[17], // perfect_6: 自分に厳しすぎると言われる
     ],
   },
   {
-    title: "日々の生活について",
+    title: "毎日の過ごし方",
     items: [
-      allItems[18], // busy_1
-      allItems[19], // busy_2
-      allItems[20], // busy_3
-      allItems[21], // busy_4
-      allItems[22], // busy_5
-      allItems[23], // busy_6
+      allItems[18], // busy_1: 時間がないが口癖
+      allItems[19], // busy_2: 自分のことは後回し
+      allItems[20], // busy_3: 1日があっという間
+      allItems[22], // busy_5: 疲れて帰ると何もする気が起きない
+      allItems[14], // perfect_3: 計画通りにいかないとやる気なくなる
+      allItems[23], // busy_6: 落ち着いたらやろうと思いつつ始められない
     ],
   },
   {
-    title: "情報との付き合い方",
+    title: "ダイエット情報について",
     items: [
-      allItems[6],  // info_1
-      allItems[7],  // info_2
-      allItems[9],  // info_4
-      allItems[10], // info_5
-      allItems[11], // info_6
+      allItems[6],  // info_1: SNS・YouTubeをよく見る
+      allItems[7],  // info_2: どれを信じればいいかわからない
+      allItems[9],  // info_4: 知識はあるのに行動に移せない
+      allItems[10], // info_5: 新しい情報で今のやり方に不安
+      allItems[11], // info_6: 結局何が正解なの
+      allItems[21], // busy_4: 運動する時間を確保するのが難しい
     ],
   },
   {
-    title: "ダイエット経験について",
+    title: "これまでのダイエット経験",
     items: [
-      allItems[24], // rebound_1
-      allItems[25], // rebound_2
-      allItems[26], // rebound_3
-      allItems[27], // rebound_4
-      allItems[28], // rebound_5
-      allItems[29], // rebound_6
-      allItems[5],  // gaman_6
+      allItems[24], // rebound_1: 3回以上チャレンジ
+      allItems[25], // rebound_2: 痩せても元に戻る
+      allItems[5],  // gaman_6: ダイエット→暴食→自己嫌悪ループ
+      allItems[26], // rebound_3: やり方自体は知ってる
+      allItems[28], // rebound_5: 一時的には頑張れるが長続きしない
+      allItems[29], // rebound_6: 今度こそが何度目かわからない
     ],
   },
 ];

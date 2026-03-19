@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { checkGroups, calcType } from "@/lib/diagnosis";
 import HamburgerMenu from "@/components/HamburgerMenu";
 
-/* ── 分析中画面（温かみあるデザイン） ── */
+const MIN_CHECKS = 5;
 
+/* ── 分析中画面 ── */
 const analyzingSteps = [
   "あなたの回答を読み取っています...",
   "パターンを分析しています...",
@@ -26,52 +27,38 @@ function AnalyzingScreen() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#FBF8F4] px-5">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-white px-5">
       <div className="flex flex-col items-center gap-8 w-full max-w-xs">
-        {/* やわらかいスピナー */}
-        <div className="relative w-28 h-28">
-          <div className="absolute inset-0 rounded-full border-4 border-amber-100" />
+        <div className="relative w-24 h-24">
+          <div className="absolute inset-0 rounded-full border-4 border-gray-100" />
           <div
-            className="absolute inset-0 rounded-full border-4 border-transparent border-t-amber-500 border-r-amber-300"
+            className="absolute inset-0 rounded-full border-4 border-transparent border-t-amber-500 border-r-amber-400"
             style={{ animation: "spin 1.2s linear infinite" }}
           />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-3xl">✨</span>
-          </div>
         </div>
 
         <div className="text-center">
-          <p className="text-amber-900 font-bold text-xl mb-2">あなたのタイプを診断中</p>
-          <p
-            key={stepIndex}
-            className="text-amber-700/70 text-sm"
-            style={{ animation: "fadeSlide 0.35s ease" }}
-          >
+          <p className="text-gray-900 font-bold text-lg mb-2">あなたのタイプを診断中</p>
+          <p key={stepIndex} className="text-gray-500 text-sm" style={{ animation: "fadeSlide 0.35s ease" }}>
             {analyzingSteps[stepIndex]}
           </p>
         </div>
 
         <div className="w-full">
-          <div className="w-full bg-amber-100 rounded-full h-2 overflow-hidden">
+          <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
             <div
-              className="bg-gradient-to-r from-amber-400 to-orange-400 h-2 rounded-full transition-all duration-100"
+              className="bg-amber-500 h-2 rounded-full transition-all duration-100"
               style={{ width: `${Math.round(progress)}%` }}
             />
           </div>
-          <p className="text-center text-amber-600/60 text-xs mt-2 font-medium">
-            {Math.round(progress)}%
-          </p>
+          <p className="text-center text-gray-400 text-xs mt-2">{Math.round(progress)}%</p>
         </div>
       </div>
     </div>
   );
 }
 
-/* ── グループのアイコン ── */
-const groupIcons = ["🍽️", "💭", "🏃‍♀️", "📱", "🔄"];
-
-/* ── メイン：チェックリスト診断 ── */
-
+/* ── メイン ── */
 export default function DiagnosisPage() {
   const router = useRouter();
   const [checked, setChecked] = useState<Set<string>>(new Set());
@@ -86,8 +73,10 @@ export default function DiagnosisPage() {
     });
   };
 
+  const canSubmit = checked.size >= MIN_CHECKS;
+
   const handleSubmit = () => {
-    if (checked.size === 0) return;
+    if (!canSubmit) return;
     setIsAnalyzing(true);
     const type = calcType(Array.from(checked));
     setTimeout(() => router.push(`/result/${type}`), 3200);
@@ -95,35 +84,29 @@ export default function DiagnosisPage() {
 
   if (isAnalyzing) return <AnalyzingScreen />;
 
-  const totalItems = checkGroups.reduce((s, g) => s + g.items.length, 0);
-
   return (
-    <main className="min-h-screen bg-[#FBF8F4] px-4 py-8">
+    <main className="min-h-screen bg-white px-4 py-8">
       <HamburgerMenu />
-
       <div className="max-w-md mx-auto flex flex-col gap-6">
 
         {/* Header */}
-        <div className="text-center pt-4">
-          <p className="text-xs tracking-[0.15em] text-amber-600/60 font-medium mb-3">
-            STAY GOLD GYM
-          </p>
-          <h1 className="text-2xl font-black text-amber-950 leading-snug mb-2">
-            あなたの<br />
-            <span className="text-amber-600">ダイエットタイプ</span>は？
+        <div className="text-center pt-2 pb-2">
+          <p className="text-[11px] tracking-[0.15em] text-gray-400 font-medium mb-3">STAY GOLD GYM</p>
+          <h1 className="text-[22px] font-black text-gray-900 leading-snug mb-2">
+            あなたのダイエットタイプ診断
           </h1>
-          <p className="text-amber-800/60 text-sm">
-            当てはまるものを<span className="text-amber-700 font-bold">すべて</span>チェックしてね
+          <p className="text-gray-500 text-sm leading-relaxed">
+            当てはまるものをすべてチェックしてください<br />
+            <span className="text-gray-400 text-xs">タップするだけ・約1分で完了します</span>
           </p>
         </div>
 
         {/* チェックリスト */}
         {checkGroups.map((group, gi) => (
           <div key={gi} className="flex flex-col gap-2">
-            <div className="flex items-center gap-2 mb-1 px-1">
-              <span className="text-base">{groupIcons[gi]}</span>
-              <p className="text-amber-900 font-bold text-sm">{group.title}</p>
-            </div>
+            <p className="text-gray-900 font-bold text-[13px] px-1 pb-1 border-b border-gray-100">
+              {group.title}
+            </p>
 
             {group.items.map((item) => {
               const isChecked = checked.has(item.id);
@@ -132,20 +115,17 @@ export default function DiagnosisPage() {
                   key={item.id}
                   onClick={() => toggle(item.id)}
                   className={`
-                    w-full text-left px-4 py-3.5 rounded-2xl border-2 transition-all text-sm leading-relaxed
+                    w-full text-left px-4 py-3 rounded-xl border transition-all text-[13px] leading-relaxed
                     ${isChecked
-                      ? "bg-amber-50 border-amber-400 text-amber-900 shadow-sm"
-                      : "bg-white border-amber-100 text-amber-800/80 active:bg-amber-50/50"
+                      ? "bg-amber-50 border-amber-400 text-gray-900"
+                      : "bg-white border-gray-200 text-gray-700 active:bg-gray-50"
                     }
                   `}
                 >
                   <div className="flex items-center gap-3">
                     <div className={`
-                      w-5 h-5 rounded-md border-2 shrink-0 flex items-center justify-center transition-all
-                      ${isChecked
-                        ? "bg-amber-500 border-amber-500"
-                        : "border-amber-200"
-                      }
+                      w-[18px] h-[18px] rounded border-2 shrink-0 flex items-center justify-center transition-all
+                      ${isChecked ? "bg-amber-500 border-amber-500" : "border-gray-300"}
                     `}>
                       {isChecked && (
                         <svg viewBox="0 0 16 16" fill="none" className="w-3 h-3">
@@ -162,27 +142,26 @@ export default function DiagnosisPage() {
         ))}
 
         {/* 診断ボタン */}
-        <div className="sticky bottom-4 pt-4">
+        <div className="sticky bottom-4 pt-3">
           <button
             onClick={handleSubmit}
-            disabled={checked.size === 0}
+            disabled={!canSubmit}
             className={`
-              w-full py-4 rounded-2xl font-bold text-base shadow-lg transition-all
-              ${checked.size > 0
-                ? "bg-gradient-to-r from-amber-500 to-orange-400 text-white active:scale-95 shadow-amber-300/30"
-                : "bg-amber-100 text-amber-300 cursor-not-allowed"
+              w-full py-4 rounded-2xl font-bold text-[15px] shadow-md transition-all
+              ${canSubmit
+                ? "bg-amber-500 text-white active:scale-[0.98] shadow-amber-200/50"
+                : "bg-gray-100 text-gray-400 cursor-not-allowed"
               }
             `}
           >
-            {checked.size > 0
-              ? `${checked.size}個チェック済み — 診断する ✨`
-              : "1つ以上チェックしてね"}
+            {canSubmit
+              ? `${checked.size}個チェック済み — 診断する`
+              : checked.size === 0
+                ? "当てはまるものをチェックしてください"
+                : `あと${MIN_CHECKS - checked.size}個以上チェックすると診断できます`
+            }
           </button>
         </div>
-
-        <p className="text-center text-amber-600/40 text-xs pb-4">
-          全{totalItems}項目 · 約1分で完了
-        </p>
       </div>
     </main>
   );
