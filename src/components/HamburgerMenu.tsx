@@ -116,12 +116,9 @@ export default function HamburgerMenu() {
                 key={item.label}
                 href={item.href}
                 onClick={close}
-                className="flex items-center justify-between px-4 py-3.5 rounded-xl text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium"
+                className="flex items-center px-4 py-3.5 rounded-xl text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors text-sm font-medium"
               >
-                <span>{item.label}</span>
-                {"note" in item && item.note && (
-                  <span className="text-[10px] text-slate-500">{item.note}</span>
-                )}
+                {item.label}
               </Link>
             )
           )}
