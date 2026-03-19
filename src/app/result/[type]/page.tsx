@@ -99,7 +99,7 @@ export default async function ResultPage({ params }: Props) {
   }
 
   const diagnosisType = type as DiagnosisType;
-  const { title, hook, body, cta } = typeMessages[diagnosisType];
+  const { title, subtitle, hook, body, cta } = typeMessages[diagnosisType];
   const accent = typeAccent[diagnosisType];
   const illust = typeIllustration[diagnosisType];
   const elmeUrl = ELME_URL;
@@ -121,7 +121,8 @@ export default async function ResultPage({ params }: Props) {
           <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full translate-y-1/2 -translate-x-1/2" />
 
           <p className="relative text-sm font-medium opacity-80 mb-1">あなたは</p>
-          <h1 className="relative text-2xl font-black mb-2">「{title}」</h1>
+          <h1 className="relative text-2xl font-black mb-1">「{title}」</h1>
+          <p className="relative text-xs font-medium opacity-70 mb-2">{subtitle}</p>
 
           {/* イラスト枠 */}
           <div className="relative bg-white/10 rounded-2xl p-6 mb-4 flex flex-col items-center justify-center min-h-[120px]">
@@ -251,8 +252,20 @@ export default async function ResultPage({ params }: Props) {
           ))}
         </div>
 
+        {/* CTA前のひと押し */}
+        <div className="text-center px-2 pt-2">
+          <p className="text-slate-300 text-sm leading-relaxed">
+            ここまで読んでくれたあなたは、<br />
+            もう「変わりたい」と感じているはず。
+          </p>
+          <p className="text-slate-400 text-xs mt-2 leading-relaxed">
+            その気持ちが一番あたたかい今のうちに、<br />
+            自分のために、受け取ってみてください。
+          </p>
+        </div>
+
         {/* CTA */}
-        <div className="flex flex-col gap-2 pt-2">
+        <div className="flex flex-col gap-2">
           <a
             href={elmeUrl}
             target="_blank"
@@ -262,7 +275,7 @@ export default async function ResultPage({ params }: Props) {
             {cta} →
           </a>
           <p className="text-center text-slate-600 text-xs">
-            LINEで受け取る · 登録無料 · いつでも退会OK
+            登録無料 · すべて無料 · いつでも退会OK
           </p>
         </div>
 

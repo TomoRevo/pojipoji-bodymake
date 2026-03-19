@@ -79,7 +79,7 @@ export function calcType(answers: ("A" | "B" | "C" | "D")[]): DiagnosisType {
 }
 
 export const typeLabels: Record<DiagnosisType, string> = {
-  first_step: "はじめの一歩タイプ",
+  first_step: "のびしろ無限タイプ",
   food_reset: "食事リセットタイプ",
   time_hack: "スキマ時間活用タイプ",
   switch_on: "本気スイッチタイプ",
@@ -87,10 +87,11 @@ export const typeLabels: Record<DiagnosisType, string> = {
 
 export const typeMessages: Record<
   DiagnosisType,
-  { title: string; hook: string; body: string[]; cta: string }
+  { title: string; subtitle: string; hook: string; body: string[]; cta: string }
 > = {
   first_step: {
-    title: "はじめの一歩タイプ",
+    title: "のびしろ無限タイプ",
+    subtitle: "まだ何もしてないからこそ、一番変われる",
     hook: "ゼロからのスタートが、実は一番変わりやすい。",
     body: [
       "ダイエットが続かない一番の理由は「我慢しようとするから」。意志の力には限界があります。でも「楽しい」と感じたことは、頑張らなくても続く。",
@@ -102,6 +103,7 @@ export const typeMessages: Record<
   },
   food_reset: {
     title: "食事リセットタイプ",
+    subtitle: "食事を見直すだけで化けるポテンシャルの持ち主",
     hook: "我慢しなくていい。「食べるもの」を変えるだけで、体は変わり始める。",
     body: [
       "食事制限が続かないのは、あなたの意志が弱いからじゃない。「我慢」は人間の脳の仕組み上、絶対に長続きしないんです。",
@@ -113,6 +115,7 @@ export const typeMessages: Record<
   },
   time_hack: {
     title: "スキマ時間活用タイプ",
+    subtitle: "たった3分の使い方で爆発的に変われる人",
     hook: "忙しいままでいい。1日3分で体は変わる。",
     body: [
       "「時間ができたらやろう」——その日は来ません。でも「3分だけ」なら、今日からできます。短い習慣ほど続きやすく、結果にもつながりやすい。",
@@ -124,6 +127,7 @@ export const typeMessages: Record<
   },
   switch_on: {
     title: "本気スイッチタイプ",
+    subtitle: "やり方さえ変われば一気にブレイクする人",
     hook: "足りなかったのは「努力」じゃない。「続けられる楽しさ」だっただけ。",
     body: [
       "これだけ頑張れるあなたが続かなかったのは、意志が弱いからじゃない。「我慢」ベースのやり方は、どんなに強い人でも限界が来るんです。",
