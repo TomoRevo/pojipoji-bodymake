@@ -162,18 +162,54 @@ export default async function ResultPage({ params }: Props) {
           <p className="text-white font-bold leading-relaxed text-base">{body[2]}</p>
         </div>
 
-        {/* ぼかしエリア：body[3] */}
+        {/* ぼかしエリア：ボリューム感を出す + 読めそうで読めない blur */}
         <div className="relative">
-          <div className="blur-[6px] select-none pointer-events-none" aria-hidden="true">
-            <div className={`bg-slate-800/60 border ${accent.border} rounded-2xl p-6`}>
+          <div className="blur-[3px] select-none pointer-events-none" aria-hidden="true">
+            {/* body[3] カード */}
+            <div className={`bg-slate-800/60 border ${accent.border} rounded-2xl p-6 mb-4`}>
               <p className={`text-xs font-bold ${accent.text} mb-2 tracking-wider`}>YOUR NEXT STEP</p>
               <p className="text-slate-200 leading-relaxed text-sm">{body[3]}</p>
             </div>
+
+            {/* ダミー追加コンテンツ（ボリューム感） */}
+            <div className={`bg-slate-800/60 border ${accent.border} rounded-2xl p-6 mb-4`}>
+              <p className={`text-xs font-bold ${accent.text} mb-2 tracking-wider`}>7日間チャレンジの内容</p>
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center gap-3">
+                  <span className={`text-xs font-black ${accent.text}`}>Day1</span>
+                  <p className="text-slate-200 text-sm">まずはここから。今日だけやればOKなアクション</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className={`text-xs font-black ${accent.text}`}>Day2</span>
+                  <p className="text-slate-200 text-sm">食事を変える最初のステップ。コンビニ活用術</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className={`text-xs font-black ${accent.text}`}>Day3</span>
+                  <p className="text-slate-200 text-sm">体が変わり始めるサインの見つけ方</p>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className={`text-xs font-black ${accent.text}`}>Day4</span>
+                  <p className="text-slate-200 text-sm">モチベーションが落ちたときの対処法</p>
+                </div>
+              </div>
+            </div>
+
+            <div className={`bg-slate-800/60 border ${accent.border} rounded-2xl p-6`}>
+              <p className={`text-xs font-bold ${accent.text} mb-2 tracking-wider`}>あなただけの特別アドバイス</p>
+              <p className="text-slate-200 leading-relaxed text-sm">このタイプの方に共通する「つまずきポイント」と、その乗り越え方をまとめました。ここを押さえるだけで、成功率が大きく変わります。</p>
+            </div>
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/0 via-slate-900/80 to-slate-900 flex items-end justify-center pb-4">
-            <p className="text-slate-300 text-sm font-bold text-center">
-              あなた専用のアドバイスと特典を<br />LINEで無料でお届けします
-            </p>
+
+          {/* グラデーションオーバーレイ（下半分だけ） */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/60 to-slate-900 flex items-end justify-center pb-6">
+            <div className="text-center px-4">
+              <p className="text-white text-sm font-black mb-1">
+                続きはLINEで無料でお届けします
+              </p>
+              <p className="text-slate-400 text-xs">
+                あなた専用のアドバイス + 3大特典つき
+              </p>
+            </div>
           </div>
         </div>
 
